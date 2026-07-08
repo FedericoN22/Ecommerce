@@ -1,6 +1,6 @@
 using E_commerceApi.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
-using E_commerceApi.Domain.Entities;
+using E_commerceApi.Infrastructure.identity;
 
 namespace E_commerceApi.extension
 {
