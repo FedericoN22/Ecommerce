@@ -1,0 +1,52 @@
+## .NET build output
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.so
+*.dylib
+
+## .NET Native
+*.app
+
+## NuGet
+*.nupkg
+**/[Pp]ackages/*
+!**/[Ppackages]/build/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+
+## IDE - Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstats
+*.userprefs
+
+## IDE - VS Code
+.vscode/
+
+## IDE - JetBrains Rider
+.idea/
+*.sln.iml
+
+## OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+## Logs
+*.log
+logs/
+
+## Secrets (contains DB password and JWT key)
+appsettings.json
+
+## Personal / notes
+Tareas.txt
+
+## Generated files
+*.generated.cs
