@@ -23,7 +23,7 @@ var app = builder.Build();
 // Add swagger use
 app.UseSwaggerServices();
 
-// Add CORS use
+// Add CORS use 
 app.UseCorsServices();
 
 app.UseAuthentication();
