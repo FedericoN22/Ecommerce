@@ -10,37 +10,37 @@ obj/
 ## .NET Native
 *.app
 
-## NuGet
-*.nupkg
-**/[Pp]ackages/*
-!**/[Ppackages]/build/
-*.nuget.props
-*.nuget.targets
-project.lock.json
+# ## NuGet
+# *.nupkg
+# **/[Pp]ackages/*
+# !**/[Ppackages]/build/
+# *.nuget.props
+# *.nuget.targets
+# project.lock.json
 
-## IDE - Visual Studio
-.vs/
-*.user
-*.suo
-*.userosscache
-*.sln.docstats
-*.userprefs
+# ## IDE - Visual Studio
+# .vs/
+# *.user
+# *.suo
+# *.userosscache
+# *.sln.docstats
+# *.userprefs
 
-## IDE - VS Code
-.vscode/
+# ## IDE - VS Code
+# .vscode/
 
-## IDE - JetBrains Rider
-.idea/
-*.sln.iml
+# ## IDE - JetBrains Rider
+# .idea/
+# *.sln.iml
 
-## OS files
-.DS_Store
-Thumbs.db
-Desktop.ini
+# ## OS files
+# .DS_Store
+# Thumbs.db
+# Desktop.ini
 
-## Logs
-*.log
-logs/
+# ## Logs
+# *.log
+# logs/
 
 ## Secrets (contains DB password and JWT key)
 appsettings.json
