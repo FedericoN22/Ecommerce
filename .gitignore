@@ -11,36 +11,36 @@ obj/
 *.app
 
 # ## NuGet
-# *.nupkg
-# **/[Pp]ackages/*
-# !**/[Ppackages]/build/
-# *.nuget.props
-# *.nuget.targets
-# project.lock.json
+*.nupkg
+**/[Pp]ackages/*
+!**/[Ppackages]/build/
+*.nuget.props
+*.nuget.targets
+project.lock.json
 
 # ## IDE - Visual Studio
-# .vs/
-# *.user
-# *.suo
-# *.userosscache
-# *.sln.docstats
-# *.userprefs
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstats
+*.userprefs
 
 # ## IDE - VS Code
-# .vscode/
+.vscode/
 
 # ## IDE - JetBrains Rider
-# .idea/
-# *.sln.iml
+.idea/
+*.sln.iml
 
 # ## OS files
-# .DS_Store
-# Thumbs.db
-# Desktop.ini
+.DS_Store
+Thumbs.db
+Desktop.ini
 
 # ## Logs
-# *.log
-# logs/
+*.log
+logs/
 
 ## Secrets (contains DB password and JWT key)
 appsettings.json
