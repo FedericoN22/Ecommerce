@@ -79,6 +79,15 @@ public class AuthService : IAuthService
 
     private async Task<AuthResponse> GenerateAuthResponseAsync(ApplicationUsers user)
     {
+
+        var jwtKey = _configuration["Jwt:Key"];
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var expiration = DateTime.UtcNow.AddMinutes(
+            double.Parse(_configuration["Jwt:ExpireMinutes"] ?? "60")
+        );
+
+
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, user.UserName),
@@ -89,13 +98,7 @@ public class AuthService : IAuthService
         var roles = await _userManager.GetRolesAsync(user);
         claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
-        var jwtKey = _configuration["Jwt:Key"];
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-        var expiration = DateTime.UtcNow.AddMinutes(
-            double.Parse(_configuration["Jwt:ExpireMinutes"] ?? "60")
-        );
 
         var token = new JwtSecurityToken(
             issuer: _configuration["Jwt:Issuer"],

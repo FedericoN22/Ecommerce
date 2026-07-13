@@ -18,6 +18,8 @@ builder.Services.AddCorsServices();
 // Add Swagger services
 builder.Services.AddSwaggerServices();
 
+builder.Services.AddServices();
+
 var app = builder.Build();
 
 // Add swagger use
