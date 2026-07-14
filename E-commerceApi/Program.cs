@@ -31,7 +31,7 @@ app.UseCorsServices();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapAuthEndpoints();
 
 
 app.Run();
