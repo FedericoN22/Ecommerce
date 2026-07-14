@@ -81,7 +81,7 @@ public class AuthService : IAuthService
     {
 
         var jwtKey = _configuration["Jwt:Key"];
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey!));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var expiration = DateTime.UtcNow.AddMinutes(
             double.Parse(_configuration["Jwt:ExpireMinutes"] ?? "60")
@@ -90,8 +90,8 @@ public class AuthService : IAuthService
 
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, user.UserName),
-            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Name, user.UserName!),
+            new Claim(ClaimTypes.Email, user.Email!),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
@@ -112,7 +112,7 @@ public class AuthService : IAuthService
         {
             Token = new JwtSecurityTokenHandler().WriteToken(token),
             Expiration = expiration,
-            Email = user.Email
+            Email = user.Email!
         };
 
 

@@ -3,6 +3,13 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using E_commerceApi.Infrastructure.identity;
 using E_commerceApi.Domain.Entities.intefaces;
 
+using E_commerceApi.Domain.Entities.product;
+using E_commerceApi.Domain.Entities.category;
+using E_commerceApi.Domain.Entities.cart;
+using E_commerceApi.Domain.Entities.cartItem;
+using E_commerceApi.Domain.Entities.order;
+using E_commerceApi.Domain.Entities.orderItem;
+
 namespace E_commerceApi.Infrastructure.Data
 {
     public class AppDbContext : IdentityDbContext<ApplicationUsers>
@@ -10,6 +17,13 @@ namespace E_commerceApi.Infrastructure.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
+
+        public DbSet<productETT> products { get; set; }
+        public DbSet<categoryETT> categories { get; set; }
+        public DbSet<cartETT> carts { get; set; }
+        public DbSet<cartItemETT> cartItems { get; set; }
+        public DbSet<OrderETT> orders { get; set; }
+        public DbSet<orderItemETT> orderItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
