@@ -1,3 +1,5 @@
+using E_commerceApi.Application.DTOs.Category.CreateCategory;
+
 public interface ICategoryService
 {
     Task<IEnumerable<CategoryResponse>> GetAllAsync();
