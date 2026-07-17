@@ -1,7 +1,11 @@
-using E_commerceApi.Application.Interfaces;
+// using E_commerceApi.Application.Interfaces;
 using E_commerceApi.Infrastructure.Data;
 using E_commerceApi.Domain.Entities.product;
 using Microsoft.EntityFrameworkCore;
+using E_commerceApi.Application.DTOs.Common;
+
+namespace E_commerceApi.Application.DTOs.Product.QueryParams;
+
 
 
 public class ProductService : IProductService
@@ -119,5 +123,51 @@ public class ProductService : IProductService
         await _context.SaveChangesAsync();
         return true;
     }
+
+    public async Task<PagedResult<ProductResponse>> GetPublicProductsAsync(ProductQueryParams queryParams)
+    {
+        var query = _context.products
+        .Include(p => p.Category)
+        .AsQueryable();
+        // Filtro por búsqueda (nombre contiene)
+        if (!string.IsNullOrWhiteSpace(queryParams.Search))
+        {
+            var searchLower = queryParams.Search.ToLower();
+            query = query.Where(p => p.Name!.ToLower().Contains(searchLower));
+        }
+        // Filtro por categoría
+        if (queryParams.CategoryId.HasValue)
+        {
+            query = query.Where(p => p.CategoryId == queryParams.CategoryId.Value);
+        }
+        var totalCount = await query.CountAsync();
+        // Paginación
+        var page = Math.Max(1, queryParams.Page);
+        var pageSize = Math.Clamp(queryParams.PageSize, 1, 50);
+        var items = await query
+            .OrderBy(p => p.Name)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .Select(p => new ProductResponse
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price,
+                Stock = p.Stock,
+                CategoryId = p.CategoryId,
+                CategoryName = p.Category!.Name
+            })
+            .ToListAsync();
+        return new PagedResult<ProductResponse>
+        {
+            Items = items,
+            TotalCount = totalCount,
+            Page = page,
+            PageSize = pageSize
+        };
+    }
+
+
 
 }

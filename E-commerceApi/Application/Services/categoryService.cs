@@ -65,7 +65,7 @@ public class CategoryService : ICategoryService
 
     public async Task<CategoryResponse> UpdateAsync(int id, UpdateCategoryRequest request)
     {
-        var category = await _context.categories.FindAsync();
+        var category = await _context.categories.FindAsync(id);
         if (category == null) return null!;
 
         category.Name = request.Name;

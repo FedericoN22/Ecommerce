@@ -11,6 +11,9 @@ public static class AdminEndpoints
         // =====================================================
         var categories = app.MapGroup("/api/admin/categories")
             .RequireAuthorization(p => p.RequireRole("Admin"));
+
+
+
         // GET /api/admin/categories
         // Retorna 200 con la lista de categorías
         categories.MapGet("/", async (ICategoryService categoryService) =>
@@ -18,6 +21,10 @@ public static class AdminEndpoints
             var categories = await categoryService.GetAllAsync();
             return Results.Ok(categories);
         });
+
+
+
+
         // GET /api/admin/categories/{id}
         // Retorna 200 si existe, 404 si no
         categories.MapGet("/{id:int}", async (int id, ICategoryService categoryService) =>
@@ -27,6 +34,10 @@ public static class AdminEndpoints
                 return Results.NotFound(new { message = $"Category with id {id} not found" });
             return Results.Ok(category);
         });
+
+
+
+
         // POST /api/admin/categories
         // Retorna 201 con la categoría creada
         // Retorna 400 si el body es inválido
@@ -37,6 +48,9 @@ public static class AdminEndpoints
             var created = await categoryService.CreateAsync(request);
             return Results.Created($"/api/admin/categories/{created.Id}", created);
         });
+
+
+
         // PUT /api/admin/categories/{id}
         // Retorna 200 con la categoría actualizada, 404 si no existe
         // Retorna 400 si el body es inválido
@@ -52,6 +66,9 @@ public static class AdminEndpoints
                 return Results.NotFound(new { message = $"Category with id {id} not found" });
             return Results.Ok(updated);
         });
+
+
+
         // DELETE /api/admin/categories/{id}
         // Retorna 204 si eliminó, 404 si no existe
         // Si tiene productos asociados, retorna 400 por FK constraint
@@ -69,11 +86,18 @@ public static class AdminEndpoints
                 return Results.BadRequest(new { message = "Cannot delete category because it has associated products" });
             }
         });
+
+
+
         // =====================================================
         // PRODUCTS
         // =====================================================
         var products = app.MapGroup("/api/admin/products")
             .RequireAuthorization(p => p.RequireRole("Admin"));
+
+
+
+
         // GET /api/admin/products
         // Retorna 200 con la lista de productos
         products.MapGet("/", async (IProductService productService) =>
@@ -81,6 +105,9 @@ public static class AdminEndpoints
             var products = await productService.GetAllAsync();
             return Results.Ok(products);
         });
+
+
+
         // GET /api/admin/products/{id}
         // Retorna 200 si existe, 404 si no
         products.MapGet("/{id:int}", async (int id, IProductService productService) =>
@@ -90,6 +117,9 @@ public static class AdminEndpoints
                 return Results.NotFound(new { message = $"Product with id {id} not found" });
             return Results.Ok(product);
         });
+
+
+
         // POST /api/admin/products
         // Retorna 201 con el producto creado
         // Retorna 400 si el body es inválido
@@ -112,6 +142,9 @@ public static class AdminEndpoints
                 return Results.BadRequest(new { message = ex.Message });
             }
         });
+
+
+
         // PUT /api/admin/products/{id}
         // Retorna 200 con el producto actualizado, 404 si no existe
         // Retorna 400 si el body es inválido o la categoría no existe
@@ -138,6 +171,9 @@ public static class AdminEndpoints
                 return Results.BadRequest(new { message = ex.Message });
             }
         });
+
+
+
         // DELETE /api/admin/products/{id}
         // Retorna 204 si eliminó, 404 si no existe
         products.MapDelete("/{id:int}", async (int id, IProductService productService) =>

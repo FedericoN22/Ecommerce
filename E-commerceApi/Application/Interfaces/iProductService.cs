@@ -1,3 +1,6 @@
+using E_commerceApi.Application.DTOs.Common;
+using E_commerceApi.Application.DTOs.Product.QueryParams;
+
 public interface IProductService
 {
     Task<IEnumerable<ProductResponse>> GetAllAsync();
@@ -9,5 +12,7 @@ public interface IProductService
     Task<ProductResponse> UpdateAsync(int id, UpdateProductRequest request);
 
     Task<bool> DeleteAsync(int id);
+
+    Task<PagedResult<ProductResponse>> GetPublicProductsAsync(ProductQueryParams queryParams);
 
 }
