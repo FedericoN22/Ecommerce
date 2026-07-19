@@ -28,7 +28,7 @@ public class productConfiguration : IEntityTypeConfiguration<productETT>
             .HasDefaultValue(0);
 
         builder.HasOne(p => p.Category)
-            .WithMany(c => c.products)
+            .WithMany(c => c.Products)
             .HasForeignKey(p => p.CategoryId)
             .OnDelete(DeleteBehavior.Restrict);
 

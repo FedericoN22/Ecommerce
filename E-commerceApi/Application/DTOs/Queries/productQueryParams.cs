@@ -1,4 +1,4 @@
-namespace E_commerceApi.Application.DTOs.Product.QueryParams
+namespace E_commerceApi.Application.DTOs.Queries
 {
     public class ProductQueryParams
     {

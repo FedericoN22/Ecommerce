@@ -1,5 +1,8 @@
 
 using E_commerceApi.extension;
+using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
+using FluentValidation;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +22,10 @@ builder.Services.AddCorsServices();
 builder.Services.AddSwaggerServices();
 
 builder.Services.AddServices();
+
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+builder.Services.AddFluentValidationAutoValidation();
+
 
 var app = builder.Build();
 

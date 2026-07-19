@@ -1,5 +1,5 @@
 using E_commerceApi.Application.DTOs.Common;
-using E_commerceApi.Application.DTOs.Product.QueryParams;
+using E_commerceApi.Application.DTOs.Queries;
 
 public interface IProductService
 {

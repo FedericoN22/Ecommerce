@@ -1,4 +1,4 @@
-using E_commerceApi.Application.DTOs.Product.QueryParams;
+using E_commerceApi.Application.DTOs.Queries;
 using E_commerceApi.Application.Interfaces;
 public static class PublicCatalogEndpoints
 {

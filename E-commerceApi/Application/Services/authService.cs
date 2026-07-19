@@ -22,8 +22,6 @@ public class AuthService : IAuthService
 
 
 
-
-
     public async Task<AuthResponse> RegisterAsync(RegisterRequest request)
     {
         var existingEmail = await _userManager.FindByEmailAsync(request.Email);
@@ -86,6 +84,8 @@ public class AuthService : IAuthService
         var expiration = DateTime.UtcNow.AddMinutes(
             double.Parse(_configuration["Jwt:ExpireMinutes"] ?? "60")
         );
+        var roles = await _userManager.GetRolesAsync(user);
+
 
 
         var claims = new List<Claim>
@@ -95,10 +95,7 @@ public class AuthService : IAuthService
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
-        var roles = await _userManager.GetRolesAsync(user);
         claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
-
-
 
         var token = new JwtSecurityToken(
             issuer: _configuration["Jwt:Issuer"],

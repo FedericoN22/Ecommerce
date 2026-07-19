@@ -1,10 +1,9 @@
-// using E_commerceApi.Application.Interfaces;
 using E_commerceApi.Infrastructure.Data;
 using E_commerceApi.Domain.Entities.product;
 using Microsoft.EntityFrameworkCore;
 using E_commerceApi.Application.DTOs.Common;
-
-namespace E_commerceApi.Application.DTOs.Product.QueryParams;
+using E_commerceApi.Application.DTOs.Queries;
+// using E_commerceApi.Application.Interfaces;
 
 
 
