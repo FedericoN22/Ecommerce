@@ -41,6 +41,7 @@ app.UseAuthorization();
 app.MapAuthEndpoints();
 app.MapAdminEndpoints();
 app.MapPublicCatalogEndpoints();
+app.MapCartEndpoints();
 
 
 app.Run();

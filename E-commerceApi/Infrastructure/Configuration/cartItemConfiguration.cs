@@ -20,12 +20,12 @@ public class cartItemConfiguration : IEntityTypeConfiguration<cartItemETT>
             .IsRequired()
             .HasColumnType("decimal(18,2)");
 
-        builder.HasOne<cartETT>()
-            .WithMany()
+        builder.HasOne(ci => ci.Cart)
+            .WithMany(c => c.Items)
             .HasForeignKey(ci => ci.CartId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasOne<productETT>()
+        builder.HasOne(ci => ci.Product)
             .WithMany()
             .HasForeignKey(ci => ci.ProductId)
             .OnDelete(DeleteBehavior.Restrict);

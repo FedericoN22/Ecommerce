@@ -25,6 +25,7 @@ namespace E_commerceApi.Infrastructure.Data
         public DbSet<OrderETT> orders { get; set; }
         public DbSet<orderItemETT> orderItems { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
