@@ -1,6 +1,6 @@
 using FluentValidation;
 
-public class UpdateCartItemRequestValidator : AbstractValidator<UpdateCarttItemRequest>
+public class UpdateCartItemRequestValidator : AbstractValidator<UpdateCartItemRequest>
 {
     public UpdateCartItemRequestValidator()
     {

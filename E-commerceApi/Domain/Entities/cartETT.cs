@@ -12,7 +12,7 @@ namespace E_commerceApi.Domain.Entities.cart
 
         public DateTime? ModifiedDateAud { get; set; }
 
-        public List<cartItemETT>? Items { get; set; }
+        public List<cartItemETT> Items { get; set; } = [];
 
     }
 }
