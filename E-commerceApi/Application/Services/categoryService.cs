@@ -1,4 +1,4 @@
-using E_commerceApi.Application.Interfaces;
+// using E_commerceApi.Application.Interfaces;
 using E_commerceApi.Infrastructure.Data;
 using E_commerceApi.Domain.Entities.category;
 using Microsoft.EntityFrameworkCore;

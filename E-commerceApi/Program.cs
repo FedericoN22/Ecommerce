@@ -2,6 +2,7 @@
 using E_commerceApi.extension;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using FluentValidation;
+using Stripe;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,8 @@ builder.Services.AddServices();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddFluentValidationAutoValidation();
 
+// Stripe
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
 var app = builder.Build();
 
@@ -42,6 +45,7 @@ app.MapAuthEndpoints();
 app.MapAdminEndpoints();
 app.MapPublicCatalogEndpoints();
 app.MapCartEndpoints();
+app.MapOrderEndpoints();
 
 
 app.Run();

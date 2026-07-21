@@ -15,11 +15,11 @@ public class orderItemConfiguration : IEntityTypeConfiguration<orderItemETT>
         builder.HasIndex(oi => oi.OrderId);
 
         builder.HasOne<OrderETT>()
-            .WithMany()
+            .WithMany(o => o.Items)
             .HasForeignKey(oi => oi.OrderId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasOne<productETT>()
+        builder.HasOne(oi => oi.Product)
             .WithMany()
             .HasForeignKey(oi => oi.ProductId)
             .OnDelete(DeleteBehavior.Restrict);

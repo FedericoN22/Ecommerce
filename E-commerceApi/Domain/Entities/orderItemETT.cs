@@ -7,5 +7,7 @@ namespace E_commerceApi.Domain.Entities.orderItem
         public int ProductId { get; set; }
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
+
+        public E_commerceApi.Domain.Entities.product.productETT? Product { get; set; }
     }
 }

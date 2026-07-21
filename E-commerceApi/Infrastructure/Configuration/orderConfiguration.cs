@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using E_commerceApi.Domain.Entities.order;
+using E_commerceApi.Infrastructure.identity;
 
 public class orderConfiguration : IEntityTypeConfiguration<OrderETT>
 {
@@ -24,5 +25,17 @@ public class orderConfiguration : IEntityTypeConfiguration<OrderETT>
             .HasConversion<string>()
             .HasMaxLength(20)
             .HasDefaultValue(OrderETT.OrderStatus.Pending);
+
+        builder.HasOne(o => o.User)
+            .WithMany()
+            .HasForeignKey(o => o.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.Property(o => o.StripeSessionId)
+            .HasMaxLength(255);
+
+        builder.HasIndex(o => o.StripeSessionId)
+            .IsUnique();
+
     }
 }
