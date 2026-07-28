@@ -6,7 +6,7 @@ using Stripe.Checkout;
 
 public static class OrderEndpoints
 {
-    public static void MapOrderEndpoints(this WebApplication app)
+    public static void MapOrderEndpoints(this IEndpointRouteBuilder app)
     {
         var checkout = app.MapGroup("/api/checkout")
             .RequireAuthorization();
@@ -20,25 +20,37 @@ public static class OrderEndpoints
             var successUrl = configuration["Stripe:SuccessUrl"]!;
             var cancelUrl = configuration["Stripe:CancelUrl"]!;
 
-            try
-            {
-                var result = await orderService.CreateCheckoutAsync(
-                    userId, successUrl, cancelUrl);
+            var result = await orderService.CreateCheckoutAsync(userId, successUrl, cancelUrl);
 
-                if (result == null)
-                    return Results.BadRequest(
-                        new { message = "Cart is empty or not found" });
+            if (result == null)
+                return Results.BadRequest(
+                    new { message = "Cart is empty or not found" });
 
-                return Results.Ok(new
-                {
-                    sessionId = result.Value.order.Id,
-                    checkoutUrl = result.Value.checkoutUrl
-                });
-            }
-            catch (InsufficientStockException ex)
+            return Results.Ok(new
             {
-                return Results.BadRequest(new { message = ex.Message });
-            }
+                sessionId = result.Value.order.Id.ToString(),
+                checkoutUrl = result.Value.checkoutUrl
+            });
+
+            // try
+            // {
+            //     var result = await orderService.CreateCheckoutAsync(
+            //         userId, successUrl, cancelUrl);
+
+            //     if (result == null)
+            //         return Results.BadRequest(
+            //             new { message = "Cart is empty or not found" });
+
+            //     return Results.Ok(new
+            //     {
+            //         sessionId = result.Value.order.Id.ToString(),
+            //         checkoutUrl = result.Value.checkoutUrl
+            //     });
+            // }
+            // catch (InsufficientStockException ex)
+            // {
+            //     return Results.BadRequest(new { message = ex.Message });
+            // }
         });
 
         var webhooks = app.MapGroup("/api/webhooks");

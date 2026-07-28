@@ -1,5 +1,7 @@
 
 using E_commerceApi.extension;
+using E_commerceApi.Infrastructure.Services;
+using E_commerceApi.Middleware;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 using FluentValidation;
 using Stripe;
@@ -27,6 +29,10 @@ builder.Services.AddServices();
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddFluentValidationAutoValidation();
 
+builder.Services.AddProblemDetails();
+builder.Services.AddScoped<ExceptionMiddleware>();
+builder.Services.AddHostedService<PendingOrderExpirationService>();
+
 // Stripe
 StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
@@ -34,6 +40,8 @@ var app = builder.Build();
 
 // Add swagger use
 app.UseSwaggerServices();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Add CORS use 
 app.UseCorsServices();

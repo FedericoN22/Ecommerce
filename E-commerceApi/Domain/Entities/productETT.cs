@@ -15,7 +15,7 @@ namespace E_commerceApi.Domain.Entities.product
 
         public DateTime CreatedDateAud { get; set; }
         public DateTime? ModifiedDateAud { get; set; }
-        public productETT? Product { get; set; }
+        // public productETT? Product { get; set; }
 
 
 

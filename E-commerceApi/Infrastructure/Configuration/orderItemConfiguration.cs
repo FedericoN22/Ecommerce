@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using E_commerceApi.Domain.Entities.orderItem;
 using E_commerceApi.Domain.Entities.order;
-using E_commerceApi.Domain.Entities.product;
+// using E_commerceApi.Domain.Entities.product;
 
 public class orderItemConfiguration : IEntityTypeConfiguration<orderItemETT>
 {

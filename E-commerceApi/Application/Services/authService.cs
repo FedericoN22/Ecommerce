@@ -32,6 +32,7 @@ public class AuthService : IAuthService
 
         var newUser = new ApplicationUsers
         {
+            FullName = request.FullName,
             Email = request.Email,
             UserName = request.Email
         };
@@ -63,13 +64,6 @@ public class AuthService : IAuthService
             throw new Exception("Invalid login attempt");
         }
 
-        var passwordValid = await _userManager.CheckPasswordAsync(user, request.Password);
-        if (!passwordValid)
-        {
-            throw new Exception("Invalid Login or Password");
-
-        }
-
         return await GenerateAuthResponseAsync(user);
 
     }
@@ -82,7 +76,7 @@ public class AuthService : IAuthService
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey!));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         var expiration = DateTime.UtcNow.AddMinutes(
-            double.Parse(_configuration["Jwt:ExpireMinutes"] ?? "60")
+            double.Parse(_configuration["Jwt:DurationInMinutes"] ?? "60")
         );
         var roles = await _userManager.GetRolesAsync(user);
 
@@ -90,6 +84,7 @@ public class AuthService : IAuthService
 
         var claims = new List<Claim>
         {
+            new Claim(ClaimTypes.NameIdentifier, user.Id),
             new Claim(ClaimTypes.Name, user.UserName!),
             new Claim(ClaimTypes.Email, user.Email!),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())

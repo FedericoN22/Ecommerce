@@ -1,8 +1,8 @@
 using E_commerceApi.Application.DTOs.Queries;
-using E_commerceApi.Application.Interfaces;
+// using E_commerceApi.Application.Interfaces;
 public static class PublicCatalogEndpoints
 {
-    public static void MapPublicCatalogEndpoints(this WebApplication app)
+    public static void MapPublicCatalogEndpoints(this IEndpointRouteBuilder app)
     {
         // GET /api/products — catálogo paginado con filtros
         var products = app.MapGroup("/api/products");

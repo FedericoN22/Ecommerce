@@ -141,8 +141,8 @@ public class ProductService : IProductService
         }
         var totalCount = await query.CountAsync();
         // Paginación
-        var page = Math.Max(1, queryParams.Page);
-        var pageSize = Math.Clamp(queryParams.PageSize, 1, 50);
+        var page = Math.Max(1, queryParams.Page ?? 1);
+        var pageSize = Math.Clamp(queryParams.PageSize ?? 10, 1, 50);
         var items = await query
             .OrderBy(p => p.Name)
             .Skip((page - 1) * pageSize)

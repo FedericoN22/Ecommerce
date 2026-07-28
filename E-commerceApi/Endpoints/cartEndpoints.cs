@@ -1,9 +1,10 @@
 using E_commerceApi.Application.DTOs;
 using E_commerceApi.Application.Interfaces;
+using FluentValidation;
 using System.Security.Claims;
 public static class CartEndpoints
 {
-    public static void MapCartEndpoints(this WebApplication app)
+    public static void MapCartEndpoints(this IEndpointRouteBuilder app)
     {
         var cart = app.MapGroup("/api/cart")
             .RequireAuthorization();
@@ -27,12 +28,19 @@ public static class CartEndpoints
         // POST /api/cart — Agregar producto al carrito
         cart.MapPost("/", async (
             AddToCartRequest request,
+            IValidator<AddToCartRequest> validator,
             ICartService cartService,
             ClaimsPrincipal user) =>
         {
+            var validation = await validator.ValidateAsync(request);
+            if (!validation.IsValid)
+                return Results.ValidationProblem(
+                    validation.Errors.GroupBy(e => e.PropertyName)
+                        .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray()));
+
             var userId = user.FindFirstValue(ClaimTypes.NameIdentifier)!;
             var item = await cartService.AddToCartAsync(userId, request);
-            Results.Created($"/api/cart", item);
+            return Results.Created($"/api/cart", item);
         });
 
 
@@ -41,9 +49,16 @@ public static class CartEndpoints
         cart.MapPut("/{cartItemId:int}", async (
             int cartItemId,
             UpdateCartItemRequest request,
+            IValidator<UpdateCartItemRequest> validator,
             ICartService cartService,
             ClaimsPrincipal user) =>
         {
+            var validation = await validator.ValidateAsync(request);
+            if (!validation.IsValid)
+                return Results.ValidationProblem(
+                    validation.Errors.GroupBy(e => e.PropertyName)
+                        .ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray()));
+
             var userId = user.FindFirstValue(ClaimTypes.NameIdentifier)!;
             var item = await cartService.UpdateCartItemAsync(userId, cartItemId, request);
             return item == null

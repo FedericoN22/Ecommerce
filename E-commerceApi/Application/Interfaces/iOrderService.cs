@@ -7,4 +7,5 @@ public interface IOrderService
     Task<(OrderResponse order, string checkoutUrl)?> CreateCheckoutAsync(
         string userId, string successUrl, string cancelUrl);
     Task<bool> ConfirmPaymentAsync(string stripeSessionId);
+    Task<int> CancelExpiredOrdersAsync(TimeSpan expiration);
 }

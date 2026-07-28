@@ -42,8 +42,9 @@ Desktop.ini
 *.log
 logs/
 
-## Secrets (contains DB password and JWT key)
+## Secrets and local configuration
 appsettings.json
+appsettings.Development.json
 
 ## Personal / notes
 Tareas.txt

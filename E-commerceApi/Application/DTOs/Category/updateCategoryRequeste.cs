@@ -1,3 +1,5 @@
+namespace E_commerceApi.Application.DTOs.Category.CategoryUpdate;
+
 public class UpdateCategoryRequest
 {
     public string? Name { get; set; }

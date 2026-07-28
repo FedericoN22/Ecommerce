@@ -3,6 +3,10 @@ using E_commerceApi.Infrastructure.Data;
 using E_commerceApi.Domain.Entities.category;
 using Microsoft.EntityFrameworkCore;
 using E_commerceApi.Application.DTOs.Category.CreateCategory;
+using E_commerceApi.Application.DTOs.Category.CategoryResponse;
+using E_commerceApi.Application.DTOs.Category.CategoryUpdate;
+
+
 // using System.Security.Cryptography.X509Certificates;
 
 

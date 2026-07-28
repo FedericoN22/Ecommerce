@@ -1,4 +1,8 @@
 using E_commerceApi.Application.DTOs.Category.CreateCategory;
+using E_commerceApi.Application.DTOs.Category.CategoryResponse;
+using E_commerceApi.Application.DTOs.Category.CategoryUpdate;
+
+
 
 public interface ICategoryService
 {

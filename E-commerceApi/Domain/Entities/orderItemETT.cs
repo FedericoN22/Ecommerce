@@ -1,3 +1,5 @@
+using E_commerceApi.Domain.Entities.product;
+
 namespace E_commerceApi.Domain.Entities.orderItem
 {
     public class orderItemETT
@@ -8,6 +10,6 @@ namespace E_commerceApi.Domain.Entities.orderItem
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
 
-        public E_commerceApi.Domain.Entities.product.productETT? Product { get; set; }
+        public productETT? Product { get; set; }
     }
 }

@@ -1,3 +1,5 @@
+namespace E_commerceApi.Application.DTOs.Category.CategoryResponse;
+
 public class CategoryResponse
 {
     public int Id { get; set; }
