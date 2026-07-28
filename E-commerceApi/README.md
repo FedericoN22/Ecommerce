@@ -30,21 +30,21 @@ Permite gestionar un sistema de comercio electrónico completo: autenticación d
 
 ## Tecnologías
 
-| Tecnología | Propósito |
-|---|---|
-| **ASP.NET Core 8** (Minimal APIs) | Framework web |
-| **Entity Framework Core 8** | ORM |
-| **PostgreSQL** (Npgsql) | Base de datos |
-| **ASP.NET Core Identity** | Gestión de usuarios y roles |
-| **JWT Bearer** | Autenticación |
-| **Stripe.net** | Pasarela de pagos |
-| **FluentValidation** | Validación de DTOs |
-| **SharpGrip.FluentValidation.AutoValidation** | Validación automática en endpoints |
-| **xUnit** | Testing |
-| **Moq** | Mocking en tests |
-| **SQLite In-Memory** | Base de datos para tests de integración |
-| **Microsoft.AspNetCore.Mvc.Testing** | Test server para integración |
-| **Swagger / Swashbuckle** | Documentación interactiva |
+| Tecnología                                    | Propósito                               |
+| --------------------------------------------- | --------------------------------------- |
+| **ASP.NET Core 8** (Minimal APIs)             | Framework web                           |
+| **Entity Framework Core 8**                   | ORM                                     |
+| **PostgreSQL** (Npgsql)                       | Base de datos                           |
+| **ASP.NET Core Identity**                     | Gestión de usuarios y roles             |
+| **JWT Bearer**                                | Autenticación                           |
+| **Stripe.net**                                | Pasarela de pagos                       |
+| **FluentValidation**                          | Validación de DTOs                      |
+| **SharpGrip.FluentValidation.AutoValidation** | Validación automática en endpoints      |
+| **xUnit**                                     | Testing                                 |
+| **Moq**                                       | Mocking en tests                        |
+| **SQLite In-Memory**                          | Base de datos para tests de integración |
+| **Microsoft.AspNetCore.Mvc.Testing**          | Test server para integración            |
+| **Swagger / Swashbuckle**                     | Documentación interactiva               |
 
 ## Arquitectura
 
@@ -184,28 +184,28 @@ stripe trigger checkout.session.completed
 
 ## Endpoints principales
 
-| Grupo | Método | Ruta | Auth | Descripción |
-|---|---|---|---|---|
-| **Auth** | POST | `/api/auth/register` | No | Registro de usuario |
-| | POST | `/api/auth/login` | No | Inicio de sesión |
-| **Catálogo** | GET | `/api/products` | No | Listar productos (search, categoryId, page, pageSize) |
-| | GET | `/api/products/{id}` | No | Detalle de producto |
-| | GET | `/api/categories` | No | Listar categorías |
-| **Admin** | GET | `/api/admin/categories` | Admin | Listar categorías |
-| | POST | `/api/admin/categories` | Admin | Crear categoría |
-| | PUT | `/api/admin/categories/{id}` | Admin | Actualizar categoría |
-| | DELETE | `/api/admin/categories/{id}` | Admin | Eliminar categoría |
-| | GET | `/api/admin/products` | Admin | Listar productos |
-| | POST | `/api/admin/products` | Admin | Crear producto |
-| | PUT | `/api/admin/products/{id}` | Admin | Actualizar producto |
-| | DELETE | `/api/admin/products/{id}` | Admin | Eliminar producto |
-| **Carrito** | GET | `/api/cart` | User | Ver carrito |
-| | POST | `/api/cart` | User | Agregar producto |
-| | PUT | `/api/cart/{cartItemId}` | User | Actualizar cantidad |
-| | DELETE | `/api/cart/{cartItemId}` | User | Eliminar ítem |
-| | DELETE | `/api/cart` | User | Vaciar carrito |
-| **Checkout** | POST | `/api/checkout` | User | Crear checkout (Stripe) |
-| **Webhook** | POST | `/api/webhooks/stripe` | No | Webhook de Stripe |
+| Grupo        | Método | Ruta                         | Auth  | Descripción                                           |
+| ------------ | ------ | ---------------------------- | ----- | ----------------------------------------------------- |
+| **Auth**     | POST   | `/api/auth/register`         | No    | Registro de usuario                                   |
+|              | POST   | `/api/auth/login`            | No    | Inicio de sesión                                      |
+| **Catálogo** | GET    | `/api/products`              | No    | Listar productos (search, categoryId, page, pageSize) |
+|              | GET    | `/api/products/{id}`         | No    | Detalle de producto                                   |
+|              | GET    | `/api/categories`            | No    | Listar categorías                                     |
+| **Admin**    | GET    | `/api/admin/categories`      | Admin | Listar categorías                                     |
+|              | POST   | `/api/admin/categories`      | Admin | Crear categoría                                       |
+|              | PUT    | `/api/admin/categories/{id}` | Admin | Actualizar categoría                                  |
+|              | DELETE | `/api/admin/categories/{id}` | Admin | Eliminar categoría                                    |
+|              | GET    | `/api/admin/products`        | Admin | Listar productos                                      |
+|              | POST   | `/api/admin/products`        | Admin | Crear producto                                        |
+|              | PUT    | `/api/admin/products/{id}`   | Admin | Actualizar producto                                   |
+|              | DELETE | `/api/admin/products/{id}`   | Admin | Eliminar producto                                     |
+| **Carrito**  | GET    | `/api/cart`                  | User  | Ver carrito                                           |
+|              | POST   | `/api/cart`                  | User  | Agregar producto                                      |
+|              | PUT    | `/api/cart/{cartItemId}`     | User  | Actualizar cantidad                                   |
+|              | DELETE | `/api/cart/{cartItemId}`     | User  | Eliminar ítem                                         |
+|              | DELETE | `/api/cart`                  | User  | Vaciar carrito                                        |
+| **Checkout** | POST   | `/api/checkout`              | User  | Crear checkout (Stripe)                               |
+| **Webhook**  | POST   | `/api/webhooks/stripe`       | No    | Webhook de Stripe                                     |
 
 Para más detalle sobre parámetros y schemas, ejecuta la aplicación y accede a Swagger.
 
@@ -233,3 +233,5 @@ Tecnologías de testing: **xUnit**, **Moq**, **SQLite In-Memory**, **Microsoft.A
 - **Rate Limiting** — Protección contra abusos en endpoints públicos.
 - **Paginación con cursor** — Para catálogos grandes.
 - **Imágenes de productos** — Subida y almacenamiento (cloud storage).
+
+PROJECT-URL https://roadmap.sh/projects/ecommerce-api
